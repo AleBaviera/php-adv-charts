@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="style.css">
     <!-- JS: MY SCRIPT -->
     <script src="script.js" charset="utf-8"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <!-- IMG: ICON -->
     <!-- <link rel="shortcut icon" href="img/me_icon.gif"> -->
     <title>chartPHP</title>
@@ -30,8 +31,8 @@
   <body>
     <div class="container">
 
-
+      <canvas id="myChart"></canvas>
     </div>
-    
+
   </body>
 </html>
