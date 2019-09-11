@@ -30,6 +30,7 @@ function getData2(){
     success: function (data){
       console.log(data);
       printChart1(data);
+      printChart2(data);
     },
     error: function (err){
       console.log('errore server');
@@ -40,8 +41,7 @@ function printChart1(data){
   var months = getMonths();
   var type1 = data.fatturato.type;
   var data1 = data.fatturato.data;
-  console.log(type1);
-  console.log(data1);
+
   var ctx = document.getElementById('myChart1').getContext('2d');
   var chart = new Chart(ctx, {
     // The type of chart we want to create
@@ -62,20 +62,25 @@ function printChart1(data){
     options: {}
   });
 }
-function printChart2(){
+function printChart2(data){
+  var months = getMonths();
+  var type2 = data.fatturato_by_agent.type;
+  var agents = Object.keys(data.fatturato_by_agent.data);
+  var data2 = Object.values(data.fatturato_by_agent.data);
+
   var ctx = document.getElementById('myChart2').getContext('2d');
   var chart = new Chart(ctx, {
     // The type of chart we want to create
-    type: 'pie',
+    type: type2,
 
     // The data for our dataset
     data: {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July','August','September', 'October', 'November', 'December'],
+        labels: agents,
         datasets: [{
             label: 'data step 2',
-            backgroundColor: 'rgb(255, 99, 132)',
+            backgroundColor: ['red', 'yellow', 'blue', 'green'],
             borderColor: 'rgb(255, 99, 132)',
-            data: data
+            data: data2
         }]
     },
 
