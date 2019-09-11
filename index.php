@@ -31,7 +31,8 @@
   <body>
     <div class="container">
 
-      <canvas id="myChart"></canvas>
+      <canvas id="myChart1"></canvas>
+      <canvas id="myChart2"></canvas>
     </div>
 
   </body>
