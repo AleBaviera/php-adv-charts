@@ -1,5 +1,5 @@
 function init() {
-  getData2();
+  $('button').click(getData3);
 
 }
 function getMonths(){
@@ -7,6 +7,7 @@ function getMonths(){
   var months = moment.months();
   return months;
 }
+
 function getData1(){
 
   $.ajax({
@@ -37,10 +38,11 @@ function getData2(){
     }
   });
 }
+
 function printChart1(data){
   var months = getMonths();
-  var type1 = data.fatturato.type;
-  var data1 = data.fatturato.data;
+  var type1 = 'line';
+  var data1 = data.data;
 
   var ctx = document.getElementById('myChart1').getContext('2d');
   var chart = new Chart(ctx, {
@@ -51,7 +53,7 @@ function printChart1(data){
     data: {
         labels: months,
         datasets: [{
-            label: 'data step 2',
+            label: 'vendite',
             backgroundColor: 'rgb(255, 99, 132)',
             borderColor: 'rgb(255, 99, 132)',
             data: data1
@@ -62,22 +64,23 @@ function printChart1(data){
     options: {}
   });
 }
+
 function printChart2(data){
-  var months = getMonths();
-  var type2 = data.fatturato_by_agent.type;
-  var agents = Object.keys(data.fatturato_by_agent.data);
-  var data2 = Object.values(data.fatturato_by_agent.data);
+
+  var level = data.employee.data;
+  var agents = Object.keys(level);
+  var data2 = Object.values(level);
 
   var ctx = document.getElementById('myChart2').getContext('2d');
   var chart = new Chart(ctx, {
     // The type of chart we want to create
-    type: type2,
+    type: 'pie',
 
     // The data for our dataset
     data: {
         labels: agents,
         datasets: [{
-            label: 'data step 2',
+            label: 'data employee',
             backgroundColor: ['red', 'yellow', 'blue', 'green'],
             borderColor: 'rgb(255, 99, 132)',
             data: data2
@@ -89,4 +92,67 @@ function printChart2(data){
   });
 
 }
+
+function getData3(){
+  var level = $('.selectLevel').val();
+
+
+
+  $.ajax({
+    url:'api3.php',
+    method:'GET',
+    data: {'level': level},
+    success: function(data){
+
+        if (level == 'guest') {
+          console.log(data);
+          printChart1(data);
+         }
+        else if (level == 'employee') {
+          console.log(data);
+          // $('.container .graphs').html('');
+          printChart1(data);
+          printChart2(data);
+        }
+        else if (level == 'clevel') {
+          console.log(data);
+          printChart3(data);
+        }
+
+
+    },
+    error: function(err){
+      console.log('errore server', err);
+    }
+  });
+}
+
+function printChart3(data){
+  var months = getMonths();
+  var data3 = Object.values(data.data);
+  var type3 = data.type;
+  var labels = Object.keys(data.data);
+
+  var ctx = document.getElementById('myChart3').getContext('2d');
+  var chart = new Chart(ctx, {
+    // The type of chart we want to create
+    type: type3,
+
+    // The data for our dataset
+    data: {
+        labels: months,
+        datasets: [{
+            label: labels,
+            backgroundColor: 'rgb(255, 99, 132)',
+            borderColor: 'rgb(255, 99, 132)',
+            data: data3
+        }]
+    },
+
+    // Configuration options go here
+    options: {}
+  });
+  // console.log(data);
+}
+
 $(document).ready(init);

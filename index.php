@@ -30,9 +30,19 @@
   </head>
   <body>
     <div class="container">
+      <select class="selectLevel" name="">
+        <option value="guest">guest</option>
+        <option value="employee">employee</option>
+        <option value="clevel">clevel</option>
+      </select>
+      <button type="button" name="button">vai</button>
+      <div class="graphs">
 
-      <canvas id="myChart1"></canvas>
-      <canvas id="myChart2"></canvas>
+
+        <canvas id="myChart1"></canvas>
+        <canvas id="myChart2"></canvas>
+        <canvas id="myChart3"></canvas>
+      </div>
     </div>
 
   </body>
