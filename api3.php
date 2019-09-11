@@ -18,7 +18,9 @@
         // }
        }
       else if ($_GET['level'] == 'clevel') {
-        $data = $graphs;
+        $data = $graphs['fatturato'];
+        $data['employee'] = $graphs['fatturato_by_agent'];
+        $data['clevel'] = $graphs['team_efficiency'];
       }
 
 

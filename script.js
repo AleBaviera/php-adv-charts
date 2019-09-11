@@ -116,6 +116,8 @@ function getData3(){
         }
         else if (level == 'clevel') {
           console.log(data);
+          printChart1(data);
+          printChart2(data);
           printChart3(data);
         }
 
@@ -129,23 +131,36 @@ function getData3(){
 
 function printChart3(data){
   var months = getMonths();
-  var data3 = Object.values(data.data);
-  var type3 = data.type;
-  var labels = Object.keys(data.data);
+  var level = data.clevel.data;
+  var data3 = Object.values(level);
+
+  var labels = Object.keys(level);
 
   var ctx = document.getElementById('myChart3').getContext('2d');
   var chart = new Chart(ctx, {
     // The type of chart we want to create
-    type: type3,
+    type: 'line',
 
     // The data for our dataset
     data: {
         labels: months,
         datasets: [{
-            label: labels,
-            backgroundColor: 'rgb(255, 99, 132)',
-            borderColor: 'rgb(255, 99, 132)',
-            data: data3
+            label: labels[0],
+            // backgroundColor: 'green',
+            borderColor: 'green',
+            data: data3[0]
+        },
+        {
+            label: labels[1],
+            // backgroundColor: 'blue',
+            borderColor: 'blue',
+            data: data3[1]
+        },
+        {
+            label: labels[2],
+            // backgroundColor: 'yellow',
+            borderColor: 'yellow',
+            data: data3[2]
         }]
     },
 
