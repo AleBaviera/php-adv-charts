@@ -39,9 +39,7 @@
       <div class="graphs">
 
 
-        <canvas id="myChart1"></canvas>
-        <canvas id="myChart2"></canvas>
-        <canvas id="myChart3"></canvas>
+        
       </div>
     </div>
 

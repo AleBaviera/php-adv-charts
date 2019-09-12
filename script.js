@@ -92,6 +92,10 @@ function printChart2(data){
   });
 
 }
+function clearGraphs(){
+  $('.graphs').html('');
+  $('.graphs').append('<canvas id="myChart1"></canvas><canvas id="myChart2"></canvas><canvas id="myChart3"></canvas>');
+}
 
 function getData3(){
   var level = $('.selectLevel').val();
@@ -103,14 +107,14 @@ function getData3(){
     method:'GET',
     data: {'level': level},
     success: function(data){
-
+        clearGraphs();
         if (level == 'guest') {
           console.log(data);
           printChart1(data);
+        
          }
         else if (level == 'employee') {
           console.log(data);
-          // $('.container .graphs').html('');
           printChart1(data);
           printChart2(data);
         }
